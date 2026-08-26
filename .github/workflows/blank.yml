@@ -16,12 +16,12 @@ jobs:
       - id: auth
         uses: google-github-actions/auth@v3.0.0
         with:
-          project_id: PROJET_A_COMPLETER
-          workload_identity_provider: IDENTIFIANT_COMPLET_DU_FOURNISSEUR
-          service_account: EMAIL_DU_COMPTE_DE_SERVICE
+          project_id: poei-formation-gcp
+          workload_identity_provider: projects/188463848700/locations/global/workloadIdentityPools/citypulse-ci-hha/providers/forge-principale-hha
+          service_account: citypulse-deploy-sa@poei-formation-gcp.iam.gserviceaccount.com
 
       - uses: google-github-actions/setup-gcloud@v3.0.1
       - name: ecrire un artefact de test
         run: |
           echo "build $GITHUB_RUN_ID" > artefact.txt
-          gcloud storage cp artefact.txt gs://BUCKET_A_COMPLETER/
+          gcloud storage cp artefact.txt gs://citypulse-raw-hha/
