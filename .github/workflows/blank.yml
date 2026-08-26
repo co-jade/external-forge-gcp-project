@@ -1,0 +1,27 @@
+# .github/workflows/citypulse-deploy.yml
+name: citypulse-deploy
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write          # indispensable pour obtenir le jeton OIDC
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v7.0.1
+      - id: auth
+        uses: google-github-actions/auth@v3.0.0
+        with:
+          project_id: PROJET_A_COMPLETER
+          workload_identity_provider: IDENTIFIANT_COMPLET_DU_FOURNISSEUR
+          service_account: EMAIL_DU_COMPTE_DE_SERVICE
+
+      - uses: google-github-actions/setup-gcloud@v3.0.1
+      - name: ecrire un artefact de test
+        run: |
+          echo "build $GITHUB_RUN_ID" > artefact.txt
+          gcloud storage cp artefact.txt gs://BUCKET_A_COMPLETER/
