@@ -1,11 +1,10 @@
-# .github/workflows/citypulse-deploy.yml
 name: citypulse-deploy
 on:
   workflow_dispatch:
 
 permissions:
   contents: read
-  id-token: write          # indispensable pour obtenir le jeton OIDC
+  id-token: write 
 
 jobs:
   publier:
